@@ -1,0 +1,12 @@
+<div class="card">
+    <div class="card-body">
+        
+        <h4>Novo nome: </h4>
+        
+        <form action="/admin/categorias/edit" method="post">
+            <input type="text" value="{{categoria.nome}}" name="nome"  class="form-control mt-3">
+            <input type="hidden" value="{{categoria._id}}" name="id">
+            <button class="btn btn-success mt-2">Confirmar</button>
+        </form>
+    </div>
+</div>

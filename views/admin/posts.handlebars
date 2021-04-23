@@ -1,0 +1,22 @@
+{{#each erros}}
+<div class="alert alert-danger">
+    {{texto}}
+</div>
+{{/each}}
+<div class="card">
+    <div class="card-body">
+        <h3>Lista de postagens: </h3>
+        <a href="/admin/posts/add"><button class="btn btn-success mt-3">Criar postagem</button></a><br><br>
+        {{#each posts}}
+            <h4>{{titulo}}</h4>
+            <p>{{descricao}}</p>
+
+            <small>Data de criação: {{data}} <br> Categoria: {{categoria.nome}} <br> url: {{url}} </small><br>
+            <a href="/admin/posts/edit/{{_id}}"><button type="submit" class="btn btn-success mt-2">Editar</button></a>
+            <a href="/admin/posts/delete/{{_id}}"><button type="submit" class="btn btn-danger mt-2">Deletar</button></a>
+            <hr>
+        {{else}}
+        {{/each}}
+
+    </div>  
+</div>

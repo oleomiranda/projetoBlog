@@ -1,0 +1,30 @@
+<div class="jumbotron">
+  <h1 class="display-4">BLOG SOBRE NADA</h1>
+  {{#if user}}
+  <p class="lead">Seja bem vindo {{username}}</p>
+  {{else}}
+  <p class="lead">Seja bem vindo visitante</p>
+  {{/if}}
+  <hr class="my-4">
+  <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+  <p class="lead">
+    <a class="btn btn-primary btn-lg" href="/user/signup" role="button">Criar conta</a>
+  </p>
+</div>
+<br><br>
+<h3>POSTAGENS RECENTES:</h3><br>
+
+        {{#each post}}
+        <div class="card mt-2">
+            <div class="card-body">
+            <a href="/posts/{{url}}">
+            <h3>{{titulo}}</h3>
+            <h5>{{descricao}}</h5>
+            <hr>
+            <small>Categoria: {{categoria.nome}}</small>
+            </a>
+            </div>
+        </div>
+         
+        {{else}}
+        {{/each}}
