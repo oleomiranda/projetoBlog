@@ -18,6 +18,7 @@ app.use(flash())
 
 app.use((req, res, next) => {
     res.locals.error_msg = req.flash('error_msg')
+    res.locals.success_msg = req.flash('success_msg')
     next()
 })
 
@@ -33,7 +34,11 @@ app.use("", userroute)
 app.use("/admin", adminroute)
 
 app.get("/", (req, res) => {
-    res.render('admin/index')
+    res.render('public/index')
+})
+
+app.get("/categorias", (req, res) => {
+    res.render("categorias/index")
 })
 
 app.get("/404", (req, res) => {

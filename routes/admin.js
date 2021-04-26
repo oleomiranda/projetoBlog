@@ -1,18 +1,19 @@
 const route = require("express").Router()
+const categoryControl = require('../controllers/categoryContol')
 
-route.get("/categoria/add", (req, res) => {
+route.get("/categorias/add", (req, res) => {
     res.render("admin/add_categoria")
 })
 
+route.post("/categorias/add", categoryControl.NewCategory)
 
+route.get("/categorias/edit/:id", categoryControl.GetEditCategory)
 
-route.get("/categorias/", (req, res) => {
-    res.render("/categorias/index")
-})
+route.post("/categorias/edit", categoryControl.SendEditCategory)
 
-route.delete("/categoria/:id", (req, res) => {
-    
-})
+route.post("/categorias/delete", categoryControl.DeleteCategory)
+
+route.get("/categorias/", categoryControl.RenderCategory)
 
 route.get("/posts", (req, res) => {
     res.render("admin/posts")

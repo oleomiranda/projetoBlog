@@ -4,7 +4,7 @@
         <br>
         <a href="/admin/categorias/add"><button class="btn btn-success">Adicionar categoria</button></a><br><hr>
         {{#each categoria}}
-          <h4>{{nome}}</h4>
+          <h4>{{name}}</h4>
           <a href="/admin/categorias/edit/{{_id}}"><button class="btn btn-success">Editar</button></a> 
           <form action="/admin/categorias/delete" method="post">
           <input type="hidden" name="id" value="{{_id}}">
