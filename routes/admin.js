@@ -1,5 +1,6 @@
 const route = require("express").Router()
-const categoryControl = require('../controllers/categoryContol')
+const categoryControl = require('../controllers/categoryControl')
+const postControl = require('../controllers/postControl')
 
 route.get("/categorias/add", (req, res) => {
     res.render("admin/add_categoria")
@@ -19,16 +20,10 @@ route.get("/posts", (req, res) => {
     res.render("admin/posts")
 })
 
-route.get("/posts/add", (req, res) => {
-    res.render("admin/add_post")
-})
+route.get("/posts/add", postControl.createPost)
 
-route.patch("/posts/:url", (req, res) => {
-    
-})
+route.post("/posts/add/", postControl.sendCreatePost)
 
-route.get("/post/:url", (req, res) => {
-    res.render("admin/post_unico")
-})
+
 
 module.exports = route;

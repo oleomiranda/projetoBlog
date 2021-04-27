@@ -1,7 +1,8 @@
 const mongoose = require('mongoose')
 require("../models/category")
 const category = mongoose.model('category')
-
+require("../models/post")
+const post = mongoose.model('post')
 module.exports = {
     NewCategory(req, res){
     category.findOne({name: req.body.nome}).then((Category) => {
@@ -17,7 +18,7 @@ module.exports = {
             })
         }
     })
-},
+    },
 
     GetEditCategory(req, res){
     category.findOne({_id: req.params.id}).lean().then((categoria) => {
@@ -25,7 +26,7 @@ module.exports = {
         res.render("admin/edit_categoria", {categoria: categoria})
     })
     
-},
+    },
 
     SendEditCategory(req, res){
     category.findOne({_id: req.body.id}).then((categoria) => {
@@ -40,19 +41,35 @@ module.exports = {
             req.flash('error_msg', 'Houve um erro ao editar a categoria')
             res.redirect('/admin/categorias')
     })
-},
+    },
 
     DeleteCategory(req, res){
     category.remove({_id: req.body.id}).then(() => {
         req.flash('sucess_msg', 'Categoria removida com sucesso')
         res.redirect("/admin/categorias")
     })
-},
+    },
 
     RenderCategory(req, res){   
     category.find().lean().then((categoria) => {
         res.render("admin/controle_categorias", {categoria: categoria})
     })
     
-}
+    },
+    index(req, res){
+        category.find().lean().then((categoria) => {
+            res.render("categorias/index", {categoria: categoria})
+        })
+    },
+    findPosts(req, res){
+        category.findOne({name: req.params.name}).lean().then((Category) => {
+            if(Category){
+                post.find({category: Category._id}).lean().then((Post) => {
+                    res.render('categorias/postagens', {post: Post, category: Category})
+                })
+            }else{
+                res.render('categorias/postagens')
+            }
+        })
+    }
 } 

@@ -11,10 +11,10 @@ module.exports = {
             }else{
 
                 if(req.body.senha != req.body.senha2){
-                    errors.push({texto: 'As senhas não batem'})
+                    errors.push({text: 'As senhas não batem'})
                 }
                 if(req.body.senha.length < 6){
-                    errors.push({texto: "A senha precisa ter mais de 6 caracteres"})
+                    errors.push({text: "A senha precisa ter mais de 6 caracteres"})
                 }
                 if(errors.length > 0){
                     res.render("user/signup", {errors: errors})

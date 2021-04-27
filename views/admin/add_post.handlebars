@@ -1,23 +1,26 @@
-{{#each erros}}
-<div class="alert alert-danger"><p>{{texto}}</p></div>
+{{#each error}}
+    <div class="alert alert-danger">{{text}}</div>
 {{/each}}
-
 <h3>Criar postagem: </h3>
 <div class="card">
     <div class="card-body">
-            <form action="/admin/posts/novo" method="POST">
+            <form action="/admin/posts/add" method="POST">
             <label for="titulo">Titulo: </label>
-            <input type="text" name="titulo" class="form-control">
+            <input type="text" name="titulo" class="form-control" value="{{formfields.title}}">
+            
             <label for="descricao">Descrição: </label>
-            <input type="text" name="descricao" class="form-control">
+            <input type="text" name="descricao" class="form-control" value="{{formfields.description}}">
+            
             <label for="url">Url personalizada para o seu post:</label>
             <input type="text" name="url" class="form-control">
+            
             <label for="conteudo">Conteudo: </label>
-            <textarea name="conteudo" class="form-control" placeholder="Conteudo"></textarea>
+            <textarea name="conteudo" class="form-control" placeholder="Conteudo">{{formfields.content}}</textarea>
+            
             <label for="categoria">Categoria: </label>
             <select name="categoria">
-                {{#each categoria}}
-                <option value="{{_id}}">{{nome}}</option>
+                {{#each Category}}
+                <option value="{{_id}}">{{name}}</option>
                 {{else}}
                 <option value="0">Nenhuma categoria</option>
                 {{/each}}
