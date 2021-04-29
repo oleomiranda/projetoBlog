@@ -8,7 +8,7 @@ module.exports = {
     category.findOne({name: req.body.nome}).then((Category) => {
         if(Category){
             req.flash('error_msg', 'Essa categoria ja existe')
-            res.redirect('/')
+            res.redirect('/admin/categorias/add')
         }else{
             category.create({
                 name: req.body.nome
@@ -23,7 +23,7 @@ module.exports = {
     GetEditCategory(req, res){
     category.findOne({_id: req.params.id}).lean().then((categoria) => {
         console.log(categoria)
-        res.render("admin/edit_categoria", {categoria: categoria})
+        res.render("admin/edit_categorie", {categoria: categoria})
     })
     
     },
@@ -44,31 +44,31 @@ module.exports = {
     },
 
     DeleteCategory(req, res){
-    category.remove({_id: req.body.id}).then(() => {
+    category.deleteOne({_id: req.body.id}).then(() => {
         req.flash('sucess_msg', 'Categoria removida com sucesso')
         res.redirect("/admin/categorias")
     })
     },
 
-    RenderCategory(req, res){   
+    RenderCategory(req, res){  //PAGINA ONDE ADMIN PODE EDITAR/EXCLUIR AS CATEGORIAS  
     category.find().lean().then((categoria) => {
-        res.render("admin/controle_categorias", {categoria: categoria})
+        res.render("admin/control_categories", {categoria: categoria})
     })
     
     },
     index(req, res){
         category.find().lean().then((categoria) => {
-            res.render("categorias/index", {categoria: categoria})
+            res.render("categories/index", {categoria: categoria})
         })
     },
     findPosts(req, res){
         category.findOne({name: req.params.name}).lean().then((Category) => {
             if(Category){
                 post.find({category: Category._id}).lean().then((Post) => {
-                    res.render('categorias/postagens', {post: Post, category: Category})
+                    res.render('categories/posts', {post: Post, Category: Category})
                 })
             }else{
-                res.render('categorias/postagens')
+                res.render('categories/posts')
             }
         })
     }

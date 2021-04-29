@@ -9,6 +9,7 @@ const userroute = require("./routes/user")
 const adminroute = require("./routes/admin")
 const categoryContol = require("./controllers/categoryControl")
 const indexControl = require("./controllers/indexPageControl")
+const passport = require('passport')
 
  
 mongoose.connect('mongodb://localhost/blog', ({useNewUrlParser: true, useUnifiedTopology: true}))
@@ -18,11 +19,16 @@ app.use(session({
     resave: true,
     saveUninitialized: true
 }))
+
+app.use(passport.initialize())
+app.use(passport.session())
+
 app.use(flash())
 
 app.use((req, res, next) => {
     res.locals.error_msg = req.flash('error_msg')
     res.locals.success_msg = req.flash('success_msg')
+    res.locals.user = req.user
     next()
 })
 
